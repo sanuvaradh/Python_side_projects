@@ -34,8 +34,8 @@ public class EarthquakeCityMap extends PApplet {
 	
 	public void setup() {
 		
-		size(950, 600, OPENGL);		
-		map = new UnfoldingMap(this, 200, 50, 700, 500, new Google.GoogleMapProvider());			
+	    size(950, 600, OPENGL);		
+            map = new UnfoldingMap(this, 200, 50, 700, 500, new Google.GoogleMapProvider());//Set dimensions for map display		
 	    map.zoomToLevel(2);
 	    MapUtils.createDefaultEventDispatcher(this, map);	
 			
@@ -44,10 +44,10 @@ public class EarthquakeCityMap extends PApplet {
 
 	    //collect properties for each earthquake
 	    List<PointFeature> earthquakes = ParseFeed.parseEarthquake(this, earthquakesURL);	    	   
-	    	for (PointFeature pf:earthquakes)
-	    	{	    	
-	    		map.addMarker(createMarker(pf));// add a marker for this earthquake 	
-	    	}	    		    	
+	    for (PointFeature pf:earthquakes)
+	    {	    	
+	    	map.addMarker(createMarker(pf));// add a marker for this earthquake 	
+	    }	    		    	
 	    
 	}
 		
@@ -58,31 +58,32 @@ public class EarthquakeCityMap extends PApplet {
 		
 		SimplePointMarker s= new SimplePointMarker(feature.getLocation());
 		Object magObj = feature.getProperty("magnitude");
-    	float mag=Float.parseFloat(magObj.toString());
+    	        float mag=Float.parseFloat(magObj.toString());
 		
-    	if(mag<4.0)
-    	{
-    		s.setColor(color(0,0,255));// color:Blue for low magnitudes
-    		s.setRadius(4);// small size marker
-    	}
-    	else if(mag>5.0)
-    	{
-    		s.setColor(color(255,0,0));//color Red for High magnitudes
-    		s.setRadius(10);// big sized marker
-    	}
-    	else
-    	{
-    		s.setColor(color(255,255,0));//color yellow for moderate magnitude
-    		s.setRadius(7); // medium sized marker
-    	}
+    		if(mag<4.0)
+    		{
+    			s.setColor(color(0,0,255));// color:Blue for low magnitudes
+    			s.setRadius(4);// small size marker
+    		}
+    		else if(mag>5.0)
+    		{
+    			s.setColor(color(255,0,0));//color Red for High magnitudes
+    			s.setRadius(10);// big sized marker
+    		}
+    		else
+    		{
+    			s.setColor(color(255,255,0));//color yellow for moderate magnitude
+    			s.setRadius(7); // medium sized marker
+    		}
     	
 		return s;
 	}
 	
 	
-	public void draw() {
-	    background(10);
-	    map.draw();
+	public void draw() 
+	{
+		background(10);
+		map.draw();
 	}
 
 }
